@@ -1,10 +1,24 @@
 package com.tictactoemain;
 
+import java.util.Random;
 import java.util.Scanner;
 
 public class TicTacToeMain 
 {
     public static char board[] = new char[10]; //Array of Character size 10
+    public static int randomNumber;
+    public static char user, computer;
+    
+    //Random number generation
+    public static void randomNumber()
+    {
+        int tmaxDiceValue = 2;
+        int tminDiceValue = 1;
+        Random trandomValue = new Random();
+        int value = trandomValue.nextInt((tmaxDiceValue - tminDiceValue) + 1) + tminDiceValue;
+        randomNumber = value;
+        System.out.println("randomNumber->"+randomNumber);
+    }
     
     //Creating TicTacToe Board
     public static char[] createBoard()
@@ -17,7 +31,7 @@ public class TicTacToeMain
     }
     
     //Choose the X or O letter 
-    public static char chooseLetter()
+    public static void chooseLetter()
     {
         Scanner scanInput = new Scanner(System.in);
         System.out.print("Choose small letter 'x' or 'o' : ");
@@ -30,8 +44,19 @@ public class TicTacToeMain
         {
             System.out.println("\n!!!Select x or o only!!!\n");
         }
-        System.out.println("Selected letter is -> "+userInput);
-        return userInput;
+        //assing value to user and computer
+        if(userInput == 'x')
+        {
+            user = 'x';
+            computer = 'o';
+        }
+        else
+        {
+            user = 'o';
+            computer = 'x';
+        }
+        System.out.println("user selected->"+user);
+        System.out.println("computer selected->"+computer);
     }
     
     //Is Index Free
@@ -67,29 +92,53 @@ public class TicTacToeMain
     //Insert At Index
     public static void insertAtIndex()
     {
-        Scanner sc = new Scanner(System.in);
+        Scanner scanInput = new Scanner(System.in);
         int n = 1;
-        while(n>0)
+        do
         {
-            System.out.print("Enter the Indix you want to fill :");
-            int index = 0;
-            index = sc.nextInt();
-        
-            boolean temp1 = isIndexNumberCorrect(index); //Method to check index between 1 to 9
-            boolean temp2 = isIndexFree(index); //Method to check index is empty or not
-            boolean result = true;
-        
-            if(temp1 == result && temp2 == result)
+            if(randomNumber == 1)
             {
-                char optionValue = chooseLetter();
-                board[index] = optionValue;
-                break;
+                System.out.print("(user turn)");
+                System.out.print("Enter the Indix you want to fill :");
+                int index = 0;
+                index = scanInput.nextInt();
+
+                boolean numberCorrect = isIndexNumberCorrect(index); //Method to check index between 1 to 9
+                boolean indexFree = isIndexFree(index); //Method to check index is empty or not
+                boolean result = true; //initalize manual true for cheking boolean return variable values
+                if(numberCorrect == result && indexFree == result)
+                {
+                    board[index] = user;
+                    randomNumber = 0;
+                    break;
+                }
+                else
+                {
+                    System.out.println("\n!!!Index Already Filled & Choose Any Other Index!!!\n");
+                }
             }
             else
             {
-                System.out.println("\nIndex Already Is Filled\n");
+                System.out.print("(computer turn)");
+                System.out.print("Enter the Indix you want to fill :");
+                int index = 0;
+                index = scanInput.nextInt();
+                boolean numberCorrect = isIndexNumberCorrect(index); //Method to check index between 1 to 9
+                boolean indexFree = isIndexFree(index); //Method to check index is empty or not
+                boolean result = true; //initalize manual true for cheking boolean return variable values
+                if(numberCorrect == result && indexFree == result)
+                {
+                    board[index] = computer;
+                    randomNumber = 1;
+                    break;
+                }
+                else
+                {
+                    System.out.println("!!!\nIndex Already Filled & Choose Any Other Index\n!!!");
+                }
             }
-        }
+        }while(n>0);
+       
     }
     
     //display the board
@@ -113,5 +162,6 @@ public class TicTacToeMain
         displayBoard();
         for(int i=0; i<3; i++) //loop used for debug mode to call indexfree or not three times
             insertAtIndex();
+        randomNumber();
     }
 }
