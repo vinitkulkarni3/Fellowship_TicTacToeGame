@@ -216,16 +216,38 @@ public class TicTacToeMain
         {
             System.out.println("* * * PLAYER WON * * *");
             displayBoard();
+            System.out.println("Play Again: yes-> y or No-> n");
+            System.out.print("Answer:");
+            char playOpt = scannerOption.next().charAt(0);
+            if(playOpt == 'y')
+            {
+                main(null);
+            }
+            else
+            {
+                exit(0);
+            }
         }
         else if(isWin(computer))
         {
             System.out.println("* * * COMPUTER WON * * *");
             displayBoard();
+            System.out.println("Play Again: yes-> y or No-> n");
+            System.out.print("Answer:");
+            char playOpt = scannerOption.next().charAt(0);
+            if(playOpt == 'y')
+            {
+                main(null);
+            }
+            else
+            {
+                exit(0);
+            }
         }
         else
         {
             System.out.println("* * * TIE * * *");
-        }        
+        }              
     }
     
     //Main Method
