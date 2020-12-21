@@ -17,7 +17,7 @@ public class TicTacToeMain
     }
     
     //Choose the X or O letter 
-    public static void chooseLetter()
+    public static char chooseLetter()
     {
         Scanner scanInput = new Scanner(System.in);
         System.out.print("Choose small letter 'x' or 'o' : ");
@@ -31,6 +31,7 @@ public class TicTacToeMain
             System.out.println("\n!!!Select x or o only!!!\n");
         }
         System.out.println("Selected letter is -> "+userInput);
+        return userInput;
     }
     
     //Is Index Free
@@ -71,7 +72,8 @@ public class TicTacToeMain
         while(n>0)
         {
             System.out.print("Enter the Indix you want to fill :");
-            int index = sc.nextInt();
+            int index = 0;
+            index = sc.nextInt();
         
             boolean temp1 = isIndexNumberCorrect(index); //Method to check index between 1 to 9
             boolean temp2 = isIndexFree(index); //Method to check index is empty or not
@@ -79,8 +81,8 @@ public class TicTacToeMain
         
             if(temp1 == result && temp2 == result)
             {
-                System.out.println("YES INDEX IS FREE");
-                board[index] = 'n'; //just checking for index free or not by inserting some value
+                char optionValue = chooseLetter();
+                board[index] = optionValue;
                 break;
             }
             else
