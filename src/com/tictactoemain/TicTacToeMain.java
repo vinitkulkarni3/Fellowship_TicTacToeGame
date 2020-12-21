@@ -33,6 +33,63 @@ public class TicTacToeMain
         System.out.println("Selected letter is -> "+userInput);
     }
     
+    //Is Index Free
+    public static boolean isIndexFree(int index)
+    {
+        boolean indexFree = false;
+        if(board[index] == ' ')
+        {
+            indexFree = true;
+        }
+        else
+        {
+            indexFree = false;
+        }
+        return indexFree;
+    }
+    
+    //Is Entered Number Is Between 1 to 9
+    public static boolean isIndexNumberCorrect(int index)
+    {
+        boolean indexNumber = false;
+        if(index >= 1 && index <= 9)
+        {
+            indexNumber = true;
+        }
+        else
+        {
+           System.out.println("\n!!!Entered Index Not In range!!!\n");
+        }
+        return indexNumber;
+    }
+    
+    //Insert At Index
+    public static void insertAtIndex()
+    {
+        Scanner sc = new Scanner(System.in);
+        int n = 1;
+        while(n>0)
+        {
+            System.out.print("Enter the Indix you want to fill :");
+            int index = sc.nextInt();
+        
+            boolean temp1 = isIndexNumberCorrect(index); //Method to check index between 1 to 9
+            boolean temp2 = isIndexFree(index); //Method to check index is empty or not
+            boolean result = true;
+        
+            if(temp1 == result && temp2 == result)
+            {
+                System.out.println("YES INDEX IS FREE");
+                board[index] = 'n'; //just checking for index free or not by inserting some value
+                break;
+            }
+            else
+            {
+                System.out.println("\nIndex Already Is Filled\n");
+            }
+        }
+    }
+    
     //display the board
     public static void displayBoard()
     {
@@ -52,5 +109,7 @@ public class TicTacToeMain
         char storeBoard[] = createBoard(); //Calling the Create Board
         chooseLetter(); //choose the values x and o
         displayBoard();
+        for(int i=0; i<3; i++) //loop used for debug mode to call indexfree or not three times
+            insertAtIndex();
     }
 }
