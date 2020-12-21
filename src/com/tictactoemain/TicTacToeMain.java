@@ -32,6 +32,18 @@ public class TicTacToeMain
         }
         System.out.println("Selected letter is -> "+userInput);
     }
+    
+    //display the board
+    public static void displayBoard()
+    {
+        System.out.print(board[1]+"|"+board[2]+"|"+board[3]+"|");
+        System.out.println();
+        System.out.print(board[4]+"|"+board[5]+"|"+board[6]+"|");
+        System.out.println();
+        System.out.print(board[7]+"|"+board[8]+"|"+board[9]+"|");
+        System.out.println();
+    }
+    
     //Main Method
     public static void main(String[] args) 
     {
@@ -39,5 +51,6 @@ public class TicTacToeMain
         
         char storeBoard[] = createBoard(); //Calling the Create Board
         chooseLetter(); //choose the values x and o
+        displayBoard();
     }
 }
