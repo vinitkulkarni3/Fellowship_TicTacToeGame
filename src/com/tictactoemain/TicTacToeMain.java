@@ -6,10 +6,10 @@ import java.util.Scanner;
 
 public class TicTacToeMain 
 {
-    public static char board[] = new char[10]; //Array of Character size 10
-    public static int randomNumber;
     public static char user, computer;
-    
+    public static int randomNumber;
+    public static char board[] = new char[10]; //Array of Character size 10
+   
     //Random number generation
     public static void randomNumber()
     {
@@ -21,7 +21,7 @@ public class TicTacToeMain
         System.out.println("randomNumber->"+randomNumber);
     }
     
-    //Creating TicTacToe Board
+    //UC1: Creating TicTacToe Board
     public static char[] createBoard()
     {
         for(int i=1; i<board.length; i++)
@@ -31,7 +31,7 @@ public class TicTacToeMain
         return board;
     }
     
-    //Choose the X or O letter 
+    //UC2: Choose the X or O letter 
     public static void chooseLetter()
     {
         Scanner scanInput = new Scanner(System.in);
@@ -60,7 +60,18 @@ public class TicTacToeMain
         System.out.println("computer selected->"+computer);
     }
     
-    //Is Index Free
+    //UC3: display the board
+    public static void displayBoard()
+    {
+        System.out.print(board[1]+"|"+board[2]+"|"+board[3]+"|");
+        System.out.println();
+        System.out.print(board[4]+"|"+board[5]+"|"+board[6]+"|");
+        System.out.println();
+        System.out.print(board[7]+"|"+board[8]+"|"+board[9]+"|");
+        System.out.println();
+    }
+    
+    //UC4: Is Index Free
     public static boolean isIndexFree(int index)
     {
         boolean indexFree = false;
@@ -141,17 +152,6 @@ public class TicTacToeMain
                 }
             }
         }while(n>0);
-    }
-    
-    //display the board
-    public static void displayBoard()
-    {
-        System.out.print(board[1]+"|"+board[2]+"|"+board[3]+"|");
-        System.out.println();
-        System.out.print(board[4]+"|"+board[5]+"|"+board[6]+"|");
-        System.out.println();
-        System.out.print(board[7]+"|"+board[8]+"|"+board[9]+"|");
-        System.out.println();
     }
     
     //counting which player has combination
@@ -247,14 +247,12 @@ public class TicTacToeMain
         else
         {
             System.out.println("* * * TIE * * *");
-        }              
+        }        
     }
     
     //Main Method
     public static void main(String[] args) 
     {
-        System.out.println("+-+-+ WELCOME TO TIC TAC TOE GAME +-+-+");
-       
         char showBoard[] = createBoard(); //Calling the Create Board
         
         chooseLetter(); //choose the values x and o
