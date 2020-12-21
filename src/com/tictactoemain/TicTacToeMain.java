@@ -110,6 +110,7 @@ public class TicTacToeMain
                 {
                     board[index] = user;
                     randomNumber = 0;
+                    displayWinner();
                     break;
                 }
                 else
@@ -130,6 +131,7 @@ public class TicTacToeMain
                 {
                     board[index] = computer;
                     randomNumber = 1;
+                    displayWinner();
                     break;
                 }
                 else
@@ -138,7 +140,6 @@ public class TicTacToeMain
                 }
             }
         }while(n>0);
-       
     }
     
     //display the board
@@ -152,6 +153,80 @@ public class TicTacToeMain
         System.out.println();
     }
     
+    //counting which player has combination
+    public static boolean isWin(char p)
+    {
+        int flag = 0;
+        
+        if(board[1] == p && board[2] == p && board[3] == p)
+        {
+            flag = 1;
+        }
+        else if(board[4] == p && board[5] == p && board[6] == p)
+        {
+            flag = 1;
+        }
+        else if(board[7] == p && board[8] == p && board[9] == p)
+        {
+            flag = 1;
+        }
+        else if(board[1] == p && board[4] == p && board[7] == p)
+        {
+            flag = 1;
+        }
+        else if(board[2] == p && board[5] == p && board[8] == p)
+        {
+            flag = 1;
+        }
+        else if(board[3] == p && board[6] == p && board[9] == p)
+        {
+            flag = 1;
+        }
+        else if(board[1] == p && board[5] == p && board[9] == p)
+        {
+            flag = 1;   
+        }
+        else if(board[3] == p && board[5] == p && board[7] == p)
+        {
+            flag = 1;
+        }
+             /* 1 2 3
+                4 5 6
+                7 8 9
+                
+                1 4 7
+                2 5 8
+                3 6 9
+                
+                1 5 9
+                3 5 7 */
+
+        if(flag == 1)
+            return true;
+        else
+            return false;
+    }
+    
+    //check for winner
+    public static void displayWinner()
+    {
+        Scanner scannerOption = new Scanner(System.in);
+        if(isWin(user))
+        {
+            System.out.println("* * * PLAYER WON * * *");
+            displayBoard();
+        }
+        else if(isWin(computer))
+        {
+            System.out.println("* * * COMPUTER WON * * *");
+            displayBoard();
+        }
+        else
+        {
+            System.out.println("* * * TIE * * *");
+        }        
+    }
+    
     //Main Method
     public static void main(String[] args) 
     {
@@ -160,7 +235,7 @@ public class TicTacToeMain
         char storeBoard[] = createBoard(); //Calling the Create Board
         chooseLetter(); //choose the values x and o
         displayBoard();
-        for(int i=0; i<3; i++) //loop used for debug mode to call indexfree or not three times
+        for(int i=0; i<10; i++) //loop used for debug mode to call indexfree or not three times
             insertAtIndex();
         randomNumber();
     }
