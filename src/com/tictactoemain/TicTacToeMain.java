@@ -1,5 +1,6 @@
 package com.tictactoemain;
 
+import static java.lang.System.exit;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -231,12 +232,45 @@ public class TicTacToeMain
     public static void main(String[] args) 
     {
         System.out.println("+-+-+ WELCOME TO TIC TAC TOE GAME +-+-+");
+       
+        char showBoard[] = createBoard(); //Calling the Create Board
         
-        char storeBoard[] = createBoard(); //Calling the Create Board
         chooseLetter(); //choose the values x and o
-        displayBoard();
-        for(int i=0; i<10; i++) //loop used for debug mode to call indexfree or not three times
-            insertAtIndex();
-        randomNumber();
+        randomNumber(); //generating randomNumber for who has to play first
+        
+        int n = 1;
+        while(n>0)
+        {
+            Scanner sc = new Scanner(System.in);
+            System.out.println("\n[1.INSERT 2.DISPALT 3.EXIT 4.WINNER_DISPLAY]");
+            System.out.print("Select the Option : ");
+            int option = sc.nextInt();
+
+            switch(option)
+            {
+                case 1: try
+                {
+                    insertAtIndex();
+                }
+                catch(Exception e)
+                {
+                    System.out.println();
+                }    
+                break;
+
+                case 2: displayBoard();
+                break;
+
+                case 3: exit(0);
+                break;
+                
+                case 4: displayWinner();
+                option = 5;
+                break;
+
+                default: System.out.println("Error");
+                break;
+            }
+        }
     }
 }
